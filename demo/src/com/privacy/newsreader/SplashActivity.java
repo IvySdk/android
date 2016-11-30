@@ -77,11 +77,36 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 asyncToast("like? " + success);
             }
 
-        }).setRewardAdListener(new RewardAdListener() {
+        }).setRewardAdListener(new AdListener() {
             @Override
             public void onReceiveReward(boolean success, int id) {
                 Log.e("DEMO", "receive reward " + id);
                 asyncToast("on receive reward? " + id + ", success = " + success);
+            }
+
+            @Override
+            public void onFullAdClosed() {
+
+            }
+
+            @Override
+            public void onFullAdClicked() {
+
+            }
+
+            @Override
+            public void onVideoAdClosed() {
+
+            }
+
+            @Override
+            public void onBannerAdClicked() {
+
+            }
+
+            @Override
+            public void onCrossAdClicked() {
+
             }
         }).setPaymentResultListener(new PaymentResultListener() {
             @Override
