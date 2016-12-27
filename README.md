@@ -1,5 +1,5 @@
 #  android sdk 文档
-## 1,在Activity的onCreate方法中初始化Android SDK,构造AndroidSDK builder对象，
+## 1,初始化Android SDK,构造AndroidSDK builder对象
 ```java
   @Override
     protected void onCreate() {
@@ -96,39 +96,39 @@
  AndroidSdk.hideNativeAdScrollView("unlock_pre"); //隐藏native广告
  ```
 ## 3, 提供对faceook相关操作的api	
-* 登陆
+* 登陆facebook账户
 ```java
 AndroidSdk.login();
  ```
-* 是否登陆
+* 是否登陆facebook账户
 ```java
 boolean isLogin = AndroidSdk.isLogin()
  ```
-* 分享
+* facebook分享
 ```java
  AndroidSdk.share(); //注意此方法会阻塞主线程，需启线程调用
  ```
-* 喜欢
+* facebook点赞
 ```java
 AndroidSdk.like();
  ```
-* 邀请
+* facebook邀请好友安装应用，游戏等
 ```java
 AndroidSdk.invite();
  ```
-* 挑战
+* 向你的facebook朋友发出挑战
 ```java
  AndroidSdk.challenge("haha title", "heihei message");
  ```
-* 朋友
+* 获取faceook朋友信息列表
 ```java
  String friendsJson = AndroidSdk.friends()；
   ```
-* 我
+* 获取我的faceook个人信息
 ```java
 String meJson = AndroidSdk.me();
  ```
-* 退出
+* 退出facebook账户
 ```java
  AndroidSdk.logout();
  ```
