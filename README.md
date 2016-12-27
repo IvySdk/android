@@ -136,7 +136,7 @@ String meJson = AndroidSdk.me();
 int billId = 1; //计费点
 AndroidSdk.pay(billId);
 ```
-## 6,提供对sdk初始化相关的监听回调：
+## 6,提供对sdk初始化相关接口的监听回调：
 * sdk初始化成功接口
 * 初始化成功后收到服务器回传数据
 * 初始化成功后收到通知数据
@@ -217,7 +217,7 @@ builder.setRewardAdListener(new AdListener() {
 
             @Override
             public void onBannerAdClicked() {
-                //视频广告被点击
+                //Banner广告被点击
             }
 
             @Override
