@@ -107,7 +107,7 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 5,提供使用google checkout进行支付的api，后台配置计费点 ：
+## 5,提供使用应用内支付的api，后台配置计费点 ：
 ```java
 int billId = 1; //计费点
 AndroidSdk.pay(billId);
@@ -202,7 +202,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 9,提供使用google checkout 支付事件的回调 
+## 9,提供使用应用内支付事件的回调 
 ```java
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
@@ -225,7 +225,7 @@ builder..setPaymentResultListener(new PaymentResultListener() {
 
             @Override
             public void onPaymentSystemValid() {
-                //手机，平板等不支持checkout支付功能
+                //手机，平板等不支持支付功能
                 Log.d("DEMO", "pay system is valid");
             }
   });
