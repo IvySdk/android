@@ -37,24 +37,20 @@
     }
 ```
 ## 2，提供以下样式广告的api:
-* 全屏广告，后台需配置不同时机弹出不同的广告，以便于后台统计
-  我们预定义了以下几种时机弹出的广告：
-  ```java
-  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
-  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE); //游戏暂停
-  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);//游戏过关
-  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT); //游戏退出
-  ``` 
-  您还可以自定义类型广告
- 
-  ```java
-     AndroidSdk.showFullAd("xxx");
-  ``` 
-  注意：以上类型广告的弹出不要在activity的生命周期onResume()和onPause()中调用
+* 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
+```java
+AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
+AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE); //游戏暂停
+AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);//游戏过关
+AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT); //游戏退出
+AndroidSdk.showFullAd("xxx"); //您还可以自定义类型广告
+``` 
+ 注意：以上类型广告的弹出不要在activity的生命周期onResume()和onPause()中调用
   
 * banner广告
-    ```java
-    int[] bannerPos = {
+
+```java
+int[] bannerPos = {
             AndroidSdk.POS_CENTER,      //居中显示banner广告
             AndroidSdk.POS_CENTER_BOTTOM, //中间底部显示banner广告
             AndroidSdk.POS_CENTER_TOP, //中间底部显示banner广告
@@ -62,19 +58,21 @@
             AndroidSdk.POS_LEFT_TOP, //左上角显示banner广告
             AndroidSdk.POS_RIGHT_BOTTOM, //右下角显示banner广告
             AndroidSdk.POS_RIGHT_TOP //右上角显示banner广告
-     };
-     AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
-     AndroidSdk.closeBanner(); //关闭banner广告
-     ```                    
+ };
+ AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
+ AndroidSdk.closeBanner(); //关闭banner广告
+ ```    
+ 
 * 视频广告
 ```java
- AndroidSdk.showRewardAd("default", 1);
- ```
+AndroidSdk.showRewardAd("default", 1);
+```
 * native广告
 ```java
- AndroidSdk.showNativeAdScrollView("unlock_pre", AndroidSdk.HIDE_BEHAVIOR_NO_HIDE, 50); //显示native广告
- AndroidSdk.hideNativeAdScrollView("unlock_pre"); //隐藏native广告
- ```
+AndroidSdk.showNativeAdScrollView("unlock_pre", AndroidSdk.HIDE_BEHAVIOR_NO_HIDE, 50); //显示native广告
+AndroidSdk.hideNativeAdScrollView("unlock_pre"); //隐藏native广告
+```
+ 
 ## 3, 提供对faceook相关操作的api	
 * 登陆facebook账户
 ```java
@@ -112,7 +110,7 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 5,提供使用google chekout进行支付的api ：
+## 5,提供使用google checkout进行支付的api ：
 ```java
 int money = 1;
 AndroidSdk.pay(money);
