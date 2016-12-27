@@ -33,9 +33,79 @@ AndroidSdk.onCreate(this, builder);
      ``` 
 	 </br>
 * banner广告
+	* 普通banner
+    ```java
+    int[] bannerPos = {
+            AndroidSdk.POS_CENTER,
+            AndroidSdk.POS_CENTER_BOTTOM,
+            AndroidSdk.POS_CENTER_TOP,
+            AndroidSdk.POS_LEFT_BOTTOM,
+            AndroidSdk.POS_LEFT_TOP,
+            AndroidSdk.POS_RIGHT_BOTTOM,
+            AndroidSdk.POS_RIGHT_TOP
+     };
+     AndroidSdk.showBanner("default", bannerPos[1]); //开启
+     AndroidSdk.closeBanner(); //关闭
+     ```
+	 * native banner 
+	 
+	 ```java
+	 AndroidSdk.showNativeBanner("unlock_pre", 50, 50);
+	 AndroidSdk.hideNativeBanner("unlock_pre");
+     ```         
+                    
 * 视频广告
+```java
+ AndroidSdk.showRewardAd("default", 1);
+ ```
 * native广告
-## 2,提供对sdk初始化相关的监听回调：
+```java
+ AndroidSdk.showNativeAdScrollView("unlock_pre", AndroidSdk.HIDE_BEHAVIOR_NO_HIDE, 50); //显示native广告
+ AndroidSdk.hideNativeAdScrollView("unlock_pre"); //隐藏native广告
+ ```
+## 3, 提供对faceook相关操作的api	
+* 登陆
+```java
+AndroidSdk.login();
+ ```
+* 是否登陆
+```java
+boolean isLogin = AndroidSdk.isLogin()
+ ```
+* 分享
+```java
+ AndroidSdk.share(); //注意此方法会阻塞主线程，需启线程调用
+ ```
+* 喜欢
+```java
+AndroidSdk.like();
+ ```
+* 邀请
+```java
+AndroidSdk.invite();
+ ```
+* 挑战
+```java
+ AndroidSdk.challenge("haha title", "heihei message");
+ ```
+* 朋友
+```java
+ String friendsJson = AndroidSdk.friends()；
+  ```
+* 我
+```java
+String meJson = AndroidSdk.me();
+ ```
+* 退出
+```java
+ AndroidSdk.logout();
+ ```
+## 5,提供使用google chekout进行支付的api ：
+```java
+int money = 1;
+AndroidSdk.pay(money);
+```
+## 6,提供对sdk初始化相关的监听回调：
 * sdk初始化成功事件
 * 初始化成功后收到服务器回传数据
 * 初始化成功后收到通知数据
@@ -57,7 +127,7 @@ builder.setSdkResultListener(new SdkResultListener() {
             }
  })
 ```
-## 3,提供对facebook用户相关事件的监听回调:
+## 7,提供对facebook用户相关事件的监听回调:
 * 登录是否成功
 * 邀请
 * 挑战
@@ -86,7 +156,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 4,用户对广告操作的相关事件的监听回调
+## 8,用户对广告操作的相关事件的监听回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -120,7 +190,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 5,使用google checkout 支付事件的回调 
+## 9,使用google checkout 支付事件的回调 
 ```java
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
