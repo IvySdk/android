@@ -1,8 +1,40 @@
 #  android sdk 文档
-## 1,在Activity的onCreate方法中初始化Android SDK,构造AndroidSDK builder对象
+## 1,在Activity的onCreate方法中初始化Android SDK,构造AndroidSDK builder对象，
 ```java
-AndroidSdk.Builder builder = new AndroidSdk.Builder();
-AndroidSdk.onCreate(this, builder);
+  @Override
+    protected void onCreate() {
+       AndroidSdk.Builder builder = new AndroidSdk.Builder();
+       AndroidSdk.onCreate(this, builder); //onCreate方法中调用
+    }
+  @Override
+    protected void onStart() {
+        super.onStart();
+        AndroidSdk.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        AndroidSdk.onStop();
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AndroidSdk.onPause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        AndroidSdk.onResume(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        AndroidSdk.onDestroy();
+        super.onDestroy();
+    }
 ```
 ## 2，提供以下样式广告的api:
 * 全屏广告
@@ -156,7 +188,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 8,用户对广告操作的相关事件的监听回调
+## 8,提供对广告操作的相关事件的监听回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -190,7 +222,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 9,使用google checkout 支付事件的回调 
+## 9,提供使用google checkout 支付事件的回调 
 ```java
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
