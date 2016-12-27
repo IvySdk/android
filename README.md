@@ -4,6 +4,37 @@
 AndroidSdk.Builder builder = new AndroidSdk.Builder();
 AndroidSdk.onCreate(this, builder);
 ```
+## 2，提供以下样式广告的api:
+* 全屏广告
+	 * 页面开始进入弹出的广告，即在onCreate()或onStart中调用：<br>
+     ```java
+     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START);
+     ```
+	 </br>
+	 * 页面暂停时弹出的广告，即在onPause()中调用：<br>
+	 ```java
+     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE);
+      ```</br>
+	 * 页面退出的广告，即在onStop()中调用<br>
+	 ```java
+     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT);
+     ``` 
+	 </br>
+	 * 游戏过关弹出的广告
+	 <br>
+	 ```java
+     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);
+     ``` 
+	 </br>
+	 * 自定义类型广告
+	  <br>
+	 ```java
+     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_CUSTOM);
+     ``` 
+	 </br>
+* banner广告
+* 视频广告
+* native广告
 ## 2,提供对sdk初始化相关的监听回调：
 * sdk初始化成功事件
 * 初始化成功后收到服务器回传数据
@@ -12,17 +43,17 @@ AndroidSdk.onCreate(this, builder);
 builder.setSdkResultListener(new SdkResultListener() {
             @Override
             public void onInitialized() {
-                asyncToast("sdk initialized");
+                 Log.e("DEMO","sdk initialized");
             }
 
             @Override
             public void onReceiveServerExtra(String data) {
-                asyncToast("server data: " + data);
+                 Log.e("DEMO","server data: " + data);
             }
 
             @Override
             public void onReceiveNotificationData(String data) {
-                asyncToast("noti: " + data);
+                 Log.e("DEMO","noti: " + data);
             }
  })
 ```
@@ -35,22 +66,22 @@ builder.setSdkResultListener(new SdkResultListener() {
 builder.setUserCenterListener(new UserCenterListener() {
             @Override
             public void onReceiveLoginResult(boolean success) {
-                asyncToast("login? " + success);
+                 Log.e("DEMO","login? " + success);
             }
 
             @Override
             public void onReceiveInviteResult(boolean success) {
-                asyncToast("invite? " + success);
+                 Log.e("DEMO","invite? " + success);
             }
 
             @Override
             public void onReceiveChallengeResult(int count) {
-                asyncToast("challenge? " + " count: " + count);
+                 Log.e("DEMO","challenge? " + " count: " + count);
             }
 
             @Override
             public void onReceiveLikeResult(boolean success) {
-                asyncToast("like? " + success);
+                 Log.e("DEMO","like? " + success);
             }
 
  });
@@ -60,8 +91,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 builder.setRewardAdListener(new AdListener() {
             @Override
             public void onReceiveReward(boolean success, int id) {
-                Log.e("DEMO", "receive reward " + id);
-                asyncToast("on receive reward? " + id + ", success = " + success);
+                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
             }
 
             @Override
@@ -95,22 +125,22 @@ builder.setRewardAdListener(new AdListener() {
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
             public void onPaymentSuccess(int billId) {
-                asyncToast("payment success: " + billId);
+                Log.d("DEMO","payment success: " + billId);
             }
 
             @Override
             public void onPaymentFail(int billId) {
-                asyncToast("payment fail: " + billId);
+                 Log.d("DEMO","payment fail: " + billId);
             }
 
             @Override
             public void onPaymentCanceled(int bill) {
-                asyncToast("payment cancel: " + bill);
+                Log.d("DEMO","payment cancel: " + bill);
             }
 
             @Override
             public void onPaymentSystemValid() {
-                Log.e("DEMO", "pay system is valid");
+                Log.d("DEMO", "pay system is valid");
             }
   });
   ```
