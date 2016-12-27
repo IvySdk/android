@@ -36,7 +36,33 @@
         super.onDestroy();
     }
 ```
-## 2，提供以下样式广告的api:
+## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
+  ```java
+  -keep class com.android.client.** {
+    <methods>;
+  }
+
+  -keep class android.support.** {
+    *;
+  }
+
+  -keep class com.core.async.** {
+    public *;
+  }
+
+  -keep class com.core.common.** {
+    public *;
+  }
+
+ -keep class com.core.network.** {
+    public *;
+ }
+
+ -keep class com.core.view.** {
+    public *;
+ }
+  ```
+## 3，提供以下样式广告的api:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -70,7 +96,7 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
 }
 ```
  
-## 3, 提供对faceook相关操作的api	
+## 4, 提供对faceook相关操作的api	
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -113,15 +139,15 @@ int billId = 1; //计费点
 AndroidSdk.pay(billId);
 ```
 ## 6,提供对sdk初始化相关的监听回调：
-* sdk初始化成功事件
+* sdk初始化成功接口
 * 初始化成功后收到服务器回传数据
 * 初始化成功后收到通知数据
 ```java
 builder.setSdkResultListener(new SdkResultListener() {
             @Override
             public void onInitialized() {
-                 //sdk初始化成功事件
-                 Log.e("DEMO","sdk initialized");
+                 //sdk初始化成功接口
+                 Log.e("DEMO","sdk initialized");
             }
 
             @Override
@@ -137,7 +163,7 @@ builder.setSdkResultListener(new SdkResultListener() {
             }
  })
 ```
-## 7,提供对facebook用户相关事件的监听回调:
+## 7,提供对facebook用户相关接口的监听回调:
 
 ```java
 builder.setUserCenterListener(new UserCenterListener() {
@@ -167,7 +193,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 8,提供对广告操作的相关事件的监听回调
+## 8,提供对广告操作的相关接口的监听回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -202,7 +228,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 9,提供使用应用内支付事件的回调 
+## 9,提供使用应用内支付接口的回调 
 ```java
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
@@ -219,7 +245,7 @@ builder..setPaymentResultListener(new PaymentResultListener() {
 
             @Override
             public void onPaymentCanceled(int bill) {
-                //取消支持
+                //取消支付
                 Log.d("DEMO","payment cancel: " + bill);
             }
 
@@ -230,4 +256,4 @@ builder..setPaymentResultListener(new PaymentResultListener() {
             }
   });
   ```
-     
+
