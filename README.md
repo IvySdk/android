@@ -37,31 +37,29 @@
     }
 ```
 ## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
-  ```java
-  -keep class com.android.client.** {
+```java
+-keep class com.android.client.** {
     <methods>;
-  }
-
-  -keep class android.support.** {
+}
+-keep class android.support.** {
     *;
-  }
+}
+-keep class com.core.async.** {
+   public *;
+}
 
-  -keep class com.core.async.** {
-    public *;
-  }
+-keep class com.core.common.** {
+   public *;
+}
 
-  -keep class com.core.common.** {
-    public *;
-  }
+-keep class com.core.network.** {
+   public *;
+}
 
- -keep class com.core.network.** {
-    public *;
- }
-
- -keep class com.core.view.** {
-    public *;
- }
-  ```
+-keep class com.core.view.** {
+   public *;
+}
+```
 ## 3，提供以下样式广告的api:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
