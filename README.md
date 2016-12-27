@@ -1,5 +1,5 @@
 #  android sdk 文档
-## 1,初始化Android SDK,构造AndroidSDK builder对象
+## 1,在Activity中初始化Android SDK,构造AndroidSDK builder对象
 ```java
   @Override
     protected void onCreate() {
@@ -37,55 +37,35 @@
     }
 ```
 ## 2，提供以下样式广告的api:
-* 全屏广告
-	 * 页面开始进入弹出的广告，即在onCreate()或onStart中调用：<br>
-     ```java
-     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START);
-     ```
-	 </br>
-	 * 页面暂停时弹出的广告，即在onPause()中调用：<br>
-	 ```java
-     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE);
-      ```</br>
-	 * 页面退出的广告，即在onStop()中调用<br>
-	 ```java
-     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT);
-     ``` 
-	 </br>
-	 * 游戏过关弹出的广告
-	 <br>
-	 ```java
-     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);
-     ``` 
-	 </br>
-	 * 自定义类型广告
-	  <br>
-	 ```java
-     AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_CUSTOM);
-     ``` 
-	 </br>
+* 全屏广告，后台需配置不同时机弹出不同的广告，以便于后台统计
+  我们预定义了以下几种时机弹出的广告：
+  ```java
+  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
+  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE); //游戏暂停
+  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);//游戏过关
+  AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT); //游戏退出
+  ``` 
+  您还可以自定义类型广告
+ 
+  ```java
+     AndroidSdk.showFullAd("xxx");
+  ``` 
+  注意：以上类型广告的弹出不要在activity的生命周期onResume()和onPause()中调用
+  
 * banner广告
-	* 普通banner
     ```java
     int[] bannerPos = {
-            AndroidSdk.POS_CENTER,
-            AndroidSdk.POS_CENTER_BOTTOM,
-            AndroidSdk.POS_CENTER_TOP,
-            AndroidSdk.POS_LEFT_BOTTOM,
-            AndroidSdk.POS_LEFT_TOP,
-            AndroidSdk.POS_RIGHT_BOTTOM,
-            AndroidSdk.POS_RIGHT_TOP
+            AndroidSdk.POS_CENTER,      //居中显示banner广告
+            AndroidSdk.POS_CENTER_BOTTOM, //中间底部显示banner广告
+            AndroidSdk.POS_CENTER_TOP, //中间底部显示banner广告
+            AndroidSdk.POS_LEFT_BOTTOM, //左下角显示banner广告
+            AndroidSdk.POS_LEFT_TOP, //左上角显示banner广告
+            AndroidSdk.POS_RIGHT_BOTTOM, //右下角显示banner广告
+            AndroidSdk.POS_RIGHT_TOP //右上角显示banner广告
      };
-     AndroidSdk.showBanner("default", bannerPos[1]); //开启
-     AndroidSdk.closeBanner(); //关闭
-     ```
-	 * native banner 
-	 
-	 ```java
-	 AndroidSdk.showNativeBanner("unlock_pre", 50, 50);
-	 AndroidSdk.hideNativeBanner("unlock_pre");
-     ```         
-                    
+     AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
+     AndroidSdk.closeBanner(); //关闭banner广告
+     ```                    
 * 视频广告
 ```java
  AndroidSdk.showRewardAd("default", 1);
