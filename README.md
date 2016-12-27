@@ -62,15 +62,13 @@ int[] bannerPos = {
  AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
  AndroidSdk.closeBanner(); //关闭banner广告
  ```    
- 
 * 视频广告
 ```java
-AndroidSdk.showRewardAd("default", 1);
-```
-* native广告
-```java
-AndroidSdk.showNativeAdScrollView("unlock_pre", AndroidSdk.HIDE_BEHAVIOR_NO_HIDE, 50); //显示native广告
-AndroidSdk.hideNativeAdScrollView("unlock_pre"); //隐藏native广告
+String tag = "default"; //根据tag显示不同的广告
+int rewardId = 1;
+if(AndroidSdk.hasRewardAd("default")){ //检查后台是否有配置视频广告
+    AndroidSdk.showRewardAd("default",rewardId);
+}
 ```
  
 ## 3, 提供对faceook相关操作的api	
@@ -110,10 +108,10 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 5,提供使用google checkout进行支付的api ：
+## 5,提供使用google checkout进行支付的api，后台配置计费点 ：
 ```java
-int money = 1;
-AndroidSdk.pay(money);
+int billId = 1; //计费点
+AndroidSdk.pay(billId);
 ```
 ## 6,提供对sdk初始化相关的监听回调：
 * sdk初始化成功事件
@@ -138,30 +136,31 @@ builder.setSdkResultListener(new SdkResultListener() {
  })
 ```
 ## 7,提供对facebook用户相关事件的监听回调:
-* 登录是否成功
-* 邀请
-* 挑战
-* 喜欢
+
 ```java
 builder.setUserCenterListener(new UserCenterListener() {
             @Override
             public void onReceiveLoginResult(boolean success) {
-                 Log.e("DEMO","login? " + success);
+                 //登陆facebook账户成功与否回调
+                 Log.e("DEMO","login? " + success);
             }
 
             @Override
             public void onReceiveInviteResult(boolean success) {
-                 Log.e("DEMO","invite? " + success);
+                 //邀请好友安装程序，游戏等回调
+                 Log.e("DEMO","invite? " + success);
             }
 
             @Override
             public void onReceiveChallengeResult(int count) {
-                 Log.e("DEMO","challenge? " + " count: " + count);
+                 //收到挑战结果的回调，count代表成功挑战了几位好友
+                 Log.e("DEMO","challenge? " + " count: " + count);
             }
 
             @Override
             public void onReceiveLikeResult(boolean success) {
-                 Log.e("DEMO","like? " + success);
+                 //点赞回调，是否点赞成功
+                  Log.e("DEMO","like? " + success);
             }
 
  });
@@ -176,28 +175,28 @@ builder.setRewardAdListener(new AdListener() {
 
             @Override
             public void onFullAdClosed() {
-
-            }
+                //全屏广告被关闭
+            }
 
             @Override
             public void onFullAdClicked() 
-
-            }
+                //全屏广告被点击
+            }
 
             @Override
             public void onVideoAdClosed() {
-
-            }
+                //视频广告被关闭
+            }
 
             @Override
             public void onBannerAdClicked() {
-
+                //视频广告被点击
             }
 
             @Override
             public void onCrossAdClicked() {
-
-            }
+                //交叉推广广告被点击
+            }
 });
 ```
 ## 9,提供使用google checkout 支付事件的回调 
@@ -205,22 +204,26 @@ builder.setRewardAdListener(new AdListener() {
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
             public void onPaymentSuccess(int billId) {
-                Log.d("DEMO","payment success: " + billId);
+                //支付成功
+                Log.d("DEMO","payment success: " + billId);
             }
 
             @Override
             public void onPaymentFail(int billId) {
-                 Log.d("DEMO","payment fail: " + billId);
+                 //支付失败
+                 Log.d("DEMO","payment fail: " + billId);
             }
 
             @Override
             public void onPaymentCanceled(int bill) {
-                Log.d("DEMO","payment cancel: " + bill);
+                //取消支持
+                Log.d("DEMO","payment cancel: " + bill);
             }
 
             @Override
             public void onPaymentSystemValid() {
-                Log.d("DEMO", "pay system is valid");
+                //手机，平板等不支持checkout支付功能
+                Log.d("DEMO", "pay system is valid");
             }
   });
   ```
