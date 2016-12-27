@@ -120,16 +120,19 @@ AndroidSdk.pay(billId);
 builder.setSdkResultListener(new SdkResultListener() {
             @Override
             public void onInitialized() {
+                 //sdk初始化成功事件
                  Log.e("DEMO","sdk initialized");
             }
 
             @Override
             public void onReceiveServerExtra(String data) {
+                 // 初始化成功后收到服务器回传数据
                  Log.e("DEMO","server data: " + data);
             }
 
             @Override
             public void onReceiveNotificationData(String data) {
+                 //初始化成功后收到通知数据
                  Log.e("DEMO","noti: " + data);
             }
  })
@@ -169,7 +172,8 @@ builder.setUserCenterListener(new UserCenterListener() {
 builder.setRewardAdListener(new AdListener() {
             @Override
             public void onReceiveReward(boolean success, int id) {
-                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
+                //success:是否成功显示视频广告 ,id:广告id
+                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
             }
 
             @Override
