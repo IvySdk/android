@@ -64,8 +64,8 @@ int[] bannerPos = {
  ```
 * 视频广告
 ```java
-String tag = "default"; //根据tag显示不同的广告
-int rewardId = 1;
+String tag = "default"; //根据tag显示不同的视频广告，后台配置
+int rewardId = 1; //客户端配置的视频广告显示调用时机
 if(AndroidSdk.hasRewardAd("default")){ //检查后台是否有配置视频广告
     AndroidSdk.showRewardAd("default",rewardId);
 }
