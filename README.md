@@ -9,7 +9,7 @@
   * 初始化成功后收到服务器回传数据
   * 初始化成功后收到通知数据
   ```java
-    builder.setSdkResultListener(new SdkResultListener() {
+  builder.setSdkResultListener(new SdkResultListener() {
             @Override
             public void onInitialized() {
                 asyncToast("sdk initialized");
@@ -24,8 +24,8 @@
             public void onReceiveNotificationData(String data) {
                 asyncToast("noti: " + data);
             }
-        })
-   ```
+  })
+  ```
 ## 3.提供对facebook用户相关事件的监听回调:
    * 登录是否成功
    * 邀请
@@ -53,7 +53,7 @@
                 asyncToast("like? " + success);
             }
 
-        });
+    });
     ```
 ## 4.用户对广告操作的相关事件的监听回调
      ```java
@@ -70,7 +70,7 @@
             }
 
             @Override
-            public void onFullAdClicked() {
+            public void onFullAdClicked() 
 
             }
 
@@ -88,6 +88,29 @@
             public void onCrossAdClicked() {
 
             }
-        });
+      });
       ```
-   
+## 5.对使用google checkout 支付事件的回调 
+    ```java
+   builder..setPaymentResultListener(new PaymentResultListener() {
+            @Override
+            public void onPaymentSuccess(int billId) {
+                asyncToast("payment success: " + billId);
+            }
+
+            @Override
+            public void onPaymentFail(int billId) {
+                asyncToast("payment fail: " + billId);
+            }
+
+            @Override
+            public void onPaymentCanceled(int bill) {
+                asyncToast("payment cancel: " + bill);
+            }
+
+            @Override
+            public void onPaymentSystemValid() {
+                Log.e("DEMO", "pay system is valid");
+            }
+        });
+     ```
