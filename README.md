@@ -38,26 +38,29 @@
 ```
 ## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
 ```java
+-dontwarn com.unity3d.**
 -keep class com.android.client.** {
     <methods>;
 }
+
 -keep class android.support.** {
     *;
 }
--keep class com.core.async.** {
-   public *;
+
+-keep class com.android.async.** {
+    public *;
 }
 
--keep class com.core.common.** {
-   public *;
+-keep class com.android.common.** {
+    public *;
 }
 
--keep class com.core.network.** {
-   public *;
+-keep class com.android.network.** {
+    public *;
 }
 
--keep class com.core.view.** {
-   public *;
+-keep class com.android.view.** {
+    public *;
 }
 ```
 ## 3，提供以下样式广告的api:
