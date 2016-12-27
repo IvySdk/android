@@ -61,7 +61,7 @@ int[] bannerPos = {
  };
  AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
  AndroidSdk.closeBanner(); //关闭banner广告
- ```    
+ ```
 * 视频广告
 ```java
 String tag = "default"; //根据tag显示不同的广告
