@@ -3,3 +3,16 @@ gen/
 bin/
 *.class
 *.apk
+/.gradle/
+/.idea/
+/build/
+/gradle/
+.gradle/
+.idea/
+build/
+demo.iml
+gradle/
+gradlew
+gradlew.bat
+import-summary.txt
+local.properties
