@@ -1,5 +1,34 @@
 #  android sdk 文档
-## 1,在Activity中初始化Android SDK,构造AndroidSDK builder对象
+## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中引用
+
+## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
+```java
+-dontwarn com.unity3d.**
+-keep class com.android.client.** {
+    <methods>;
+}
+
+-keep class android.support.** {
+    *;
+}
+
+-keep class com.android.async.** {
+    public *;
+}
+
+-keep class com.android.common.** {
+    public *;
+}
+
+-keep class com.android.network.** {
+    public *;
+}
+
+-keep class com.android.view.** {
+    public *;
+}
+```
+## 3,在Activity中初始化Android SDK,构造AndroidSDK builder对象
 ```java
   @Override
     protected void onCreate() {
@@ -36,34 +65,7 @@
         super.onDestroy();
     }
 ```
-## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
-```java
--dontwarn com.unity3d.**
--keep class com.android.client.** {
-    <methods>;
-}
-
--keep class android.support.** {
-    *;
-}
-
--keep class com.android.async.** {
-    public *;
-}
-
--keep class com.android.common.** {
-    public *;
-}
-
--keep class com.android.network.** {
-    public *;
-}
-
--keep class com.android.view.** {
-    public *;
-}
-```
-## 3，提供以下样式广告的api:
+## 4，提供以下样式广告的api:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -97,7 +99,7 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
 }
 ```
  
-## 4, 提供对faceook相关操作的api	
+## 5, 提供对faceook相关操作的api	
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -134,13 +136,13 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 5,提供使用应用内支付的api，后台配置计费点 ：
+## 6,提供使用应用内支付的api，后台配置计费点 ：
 ```java
 int billId = 1; //计费点
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
 AndroidSdk.query(billId);//查询支付结果
 ```
-## 6,提供对sdk初始化相关接口的监听回调：
+## 7,提供对sdk初始化相关接口的监听回调：
 * sdk初始化成功接口
 * 初始化成功后收到服务器回传数据
 * 初始化成功后收到通知数据
@@ -165,7 +167,7 @@ builder.setSdkResultListener(new SdkResultListener() {
             }
  })
 ```
-## 7,提供对facebook用户相关接口的监听回调:
+## 8,提供对facebook用户相关接口的监听回调:
 
 ```java
 builder.setUserCenterListener(new UserCenterListener() {
@@ -195,7 +197,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 8,提供对广告操作的相关接口的监听回调
+## 9,提供对广告操作的相关接口的监听回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -230,7 +232,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 9,提供使用应用内支付接口的回调 
+## 10,提供使用应用内支付接口的回调 
 ```java
 /**
 * AndroidSdk.pay(billId);//支付接口，对计费点进行支付
@@ -263,7 +265,7 @@ builder.setPaymentResultListener(new PaymentResultListener() {
             }
   });
   ```
-## 10，提供友盟统计相关接口
+## 11，提供友盟统计相关接口
 * 统计进入某页面
 ```java
 String pageName = "Shop"; 
