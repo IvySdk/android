@@ -237,7 +237,7 @@ builder.setRewardAdListener(new AdListener() {
   AndroidSdk.query(billId);//查询支付结果
   PaymentResultListener是以上两个接口的回调类
 */
-builder..setPaymentResultListener(new PaymentResultListener() {
+builder.setPaymentResultListener(new PaymentResultListener() {
             @Override
             public void onPaymentSuccess(int billId) {
                 //支付成功
@@ -263,4 +263,79 @@ builder..setPaymentResultListener(new PaymentResultListener() {
             }
   });
   ```
+## 10，提供友盟统计相关接口
+* 统计进入某页面
+```java
+String pageName = "Shop"; 
+AndroidSdk.UM_onPageStart(pageName);//统计进入商店页面
+```
+* 统计离开某页面
+```java
+String pageName = "Shop";
+AndroidSdk.UM_onPageEnd(pageName);//统计离开商店页面
+```  
+* 统计事件名称
+```java
+String eventId = "EnterGame"; //事件名称
+AndroidSdk.UM_onEvent(eventId);
+```
+* 统计事件标签操作
+```java
+String eventId = "EnterGame"; //事件名称
+String eventLabel = "eventLable";//事件的某个操作标签
+AndroidSdk.UM_onEvent("EnterGame", "openGift");
+```
+* 统计事件详细分组内容
+```java
+HashMap<String, String> map = new HashMap<>(); //事件详细分组内容
+map.put("openGift", "roll");
+int value = 1;//计数统计值，比如持续时间，每次付款金额
+AndroidSdk.UM_onEventValue("EnterGame", map, value);
+```
+* 统计关卡开始
+```java
+String level = "Level" + 5;//level ,开始哪个关卡
+AndroidSdk.UM_startLevel(level);
+```
+* 统计关卡失败
+```java
+String level = "Level" + 5); //level ,哪个关卡失败
+AndroidSdk.UM_failLevel(level);
+```
+* 关卡结束
+```java
+String level = "Level" + (new Random().nextInt(30) + 10); //level,完成哪个关卡
+AndroidSdk.UM_finishLevel(level);
+```
+* 游戏内付统计
+```java
+double money = 5.0; //内付的金额
+String itemName = "钻石"; //内付购买的商品名称
+int number = 10;//内付购买的商品数量
+double price = 99.0;//内付购买的商品价格
+AndroidSdk.UM_pay(level); 
+```
+* 购买道具统计
+```java
+String itemName = "血瓶"; //购买游戏中道具名称
+int number = 10;//购买道具数量
+double price = 99.0;//购买道具价格
+AndroidSdk.UM_buy(itemName,count,price); 
+```
+* 使用道具统计
+```java
+String itemName = "血瓶"; //使用道具名称
+int number = 10;//使用道具数量
+double price = 99.0;//使用道具价格
+AndroidSdk.UM_use(itemName,count,price); 
+```
+* 额外奖励统计
+```java
+String itemName = "血瓶"; //奖励道具名称
+int number = 5;//奖励道具数量
+double price = 99.0;//奖励道具价格
+int trigger = 1;//触发奖励的事件, 取值在 1~10 之间，“1”已经被预先定义为“系统奖励”， 2~10 需要在网站设置含义
+AndroidSdk.UM_bonus(itemName,number,price,trigger); 
+```
 
+  
