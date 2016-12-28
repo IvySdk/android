@@ -1,7 +1,7 @@
 #  android sdk 文档
-## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中引用
-
-## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
+## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中进行引用
+![Copy](/capture/android_pic1.bmp)
+## 2，如果您有使用proguard来混淆Java代码，需要添加以下规则：
 ```java
 -dontwarn com.unity3d.**
 -keep class com.android.client.** {
