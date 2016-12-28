@@ -137,7 +137,8 @@ String meJson = AndroidSdk.me();
 ## 5,提供使用应用内支付的api，后台配置计费点 ：
 ```java
 int billId = 1; //计费点
-AndroidSdk.pay(billId);
+AndroidSdk.pay(billId);//支付接口，对计费点进行支付
+AndroidSdk.query(billId);//查询支付结果
 ```
 ## 6,提供对sdk初始化相关接口的监听回调：
 * sdk初始化成功接口
@@ -231,6 +232,11 @@ builder.setRewardAdListener(new AdListener() {
 ```
 ## 9,提供使用应用内支付接口的回调 
 ```java
+/**
+* AndroidSdk.pay(billId);//支付接口，对计费点进行支付
+  AndroidSdk.query(billId);//查询支付结果
+  PaymentResultListener是以上两个接口的回调类
+*/
 builder..setPaymentResultListener(new PaymentResultListener() {
             @Override
             public void onPaymentSuccess(int billId) {
@@ -252,7 +258,7 @@ builder..setPaymentResultListener(new PaymentResultListener() {
 
             @Override
             public void onPaymentSystemValid() {
-                //手机，平板等不支持支付功能
+                //手机，平板等支持支付功能,支付环境有效的回调
                 Log.d("DEMO", "pay system is valid");
             }
   });
