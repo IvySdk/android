@@ -1,5 +1,34 @@
 #  android sdk 文档
-## 1,在Activity中初始化Android SDK,构造AndroidSDK builder对象
+## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中引用
+
+## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
+```java
+-dontwarn com.unity3d.**
+-keep class com.android.client.** {
+    <methods>;
+}
+
+-keep class android.support.** {
+    *;
+}
+
+-keep class com.android.async.** {
+    public *;
+}
+
+-keep class com.android.common.** {
+    public *;
+}
+
+-keep class com.android.network.** {
+    public *;
+}
+
+-keep class com.android.view.** {
+    public *;
+}
+```
+## 3,在Activity中初始化Android SDK,构造AndroidSDK builder对象
 ```java
   @Override
     protected void onCreate() {
@@ -36,34 +65,7 @@
         super.onDestroy();
     }
 ```
-## 2，如果你使用proguard来混淆Java代码，需要添加以下规则：
-```java
--dontwarn com.unity3d.**
--keep class com.android.client.** {
-    <methods>;
-}
-
--keep class android.support.** {
-    *;
-}
-
--keep class com.android.async.** {
-    public *;
-}
-
--keep class com.android.common.** {
-    public *;
-}
-
--keep class com.android.network.** {
-    public *;
-}
-
--keep class com.android.view.** {
-    public *;
-}
-```
-## 3，提供以下样式广告的api:
+## 4，提供以下样式广告的api:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -97,7 +99,7 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
 }
 ```
  
-## 4, 提供对faceook相关操作的api	
+## 5, 提供对faceook相关操作的api	
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -134,13 +136,13 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 5,提供使用应用内支付的api，后台配置计费点 ：
+## 6,提供使用应用内支付的api，后台配置计费点 ：
 ```java
 int billId = 1; //计费点
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
 AndroidSdk.query(billId);//查询支付结果
 ```
-## 6,提供对sdk初始化相关接口的监听回调：
+## 7,提供对sdk初始化相关接口的监听回调：
 * sdk初始化成功接口
 * 初始化成功后收到服务器回传数据
 * 初始化成功后收到通知数据
@@ -165,7 +167,7 @@ builder.setSdkResultListener(new SdkResultListener() {
             }
  })
 ```
-## 7,提供对facebook用户相关接口的监听回调:
+## 8,提供对facebook用户相关接口的监听回调:
 
 ```java
 builder.setUserCenterListener(new UserCenterListener() {
@@ -195,7 +197,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 8,提供对广告操作的相关接口的监听回调
+## 9,提供对广告操作的相关接口的监听回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -230,14 +232,14 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 9,提供使用应用内支付接口的回调 
+## 10,提供使用应用内支付接口的回调 
 ```java
 /**
 * AndroidSdk.pay(billId);//支付接口，对计费点进行支付
   AndroidSdk.query(billId);//查询支付结果
   PaymentResultListener是以上两个接口的回调类
 */
-builder..setPaymentResultListener(new PaymentResultListener() {
+builder.setPaymentResultListener(new PaymentResultListener() {
             @Override
             public void onPaymentSuccess(int billId) {
                 //支付成功
@@ -263,4 +265,79 @@ builder..setPaymentResultListener(new PaymentResultListener() {
             }
   });
   ```
+## 11，提供友盟统计相关接口
+* 统计进入某页面
+```java
+String pageName = "Shop"; 
+AndroidSdk.UM_onPageStart(pageName);//统计进入商店页面
+```
+* 统计离开某页面
+```java
+String pageName = "Shop";
+AndroidSdk.UM_onPageEnd(pageName);//统计离开商店页面
+```  
+* 统计事件名称
+```java
+String eventId = "EnterGame"; //事件名称
+AndroidSdk.UM_onEvent(eventId);
+```
+* 统计事件标签操作
+```java
+String eventId = "EnterGame"; //事件名称
+String eventLabel = "eventLable";//事件的某个操作标签
+AndroidSdk.UM_onEvent("EnterGame", "openGift");
+```
+* 统计事件详细分组内容
+```java
+HashMap<String, String> map = new HashMap<>(); //事件详细分组内容
+map.put("openGift", "roll");
+int value = 1;//计数统计值，比如持续时间，每次付款金额
+AndroidSdk.UM_onEventValue("EnterGame", map, value);
+```
+* 统计关卡开始
+```java
+String level = "Level" + 5;//level ,开始哪个关卡
+AndroidSdk.UM_startLevel(level);
+```
+* 统计关卡失败
+```java
+String level = "Level" + 5); //level ,哪个关卡失败
+AndroidSdk.UM_failLevel(level);
+```
+* 关卡结束
+```java
+String level = "Level" + (new Random().nextInt(30) + 10); //level,完成哪个关卡
+AndroidSdk.UM_finishLevel(level);
+```
+* 游戏内付统计
+```java
+double money = 5.0; //内付的金额
+String itemName = "钻石"; //内付购买的商品名称
+int number = 10;//内付购买的商品数量
+double price = 99.0;//内付购买的商品价格
+AndroidSdk.UM_pay(level); 
+```
+* 购买道具统计
+```java
+String itemName = "血瓶"; //购买游戏中道具名称
+int number = 10;//购买道具数量
+double price = 99.0;//购买道具价格
+AndroidSdk.UM_buy(itemName,count,price); 
+```
+* 使用道具统计
+```java
+String itemName = "血瓶"; //使用道具名称
+int number = 10;//使用道具数量
+double price = 99.0;//使用道具价格
+AndroidSdk.UM_use(itemName,count,price); 
+```
+* 额外奖励统计
+```java
+String itemName = "血瓶"; //奖励道具名称
+int number = 5;//奖励道具数量
+double price = 99.0;//奖励道具价格
+int trigger = 1;//触发奖励的事件, 取值在 1~10 之间，“1”已经被预先定义为“系统奖励”， 2~10 需要在网站设置含义
+AndroidSdk.UM_bonus(itemName,number,price,trigger); 
+```
 
+  
