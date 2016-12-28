@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.android.client.*;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,126 @@ import java.security.MessageDigest;
  * Created by song on 16/5/26.
  */
 public class SplashActivity extends Activity implements View.OnClickListener {
+
+    /**
+     * sdk初始化相关接口的监听回调
+     */
+    SdkResultListener sdkResultListener = new SdkResultListener() {
+        @Override
+        public void onInitialized() {
+            //sdk初始化成功接口
+            asyncToast("sdk initialized");
+        }
+
+        @Override
+        public void onReceiveServerExtra(String data) {
+            // 初始化成功后收到服务器回传数据
+            asyncToast("server data: " + data);
+        }
+
+        @Override
+        public void onReceiveNotificationData(String data) {
+            //初始化成功后收到通知数据
+            asyncToast("noti: " + data);
+        }
+    };
+
+    /**
+     * 对facebook用户操作相关接口的监听回调
+     */
+    UserCenterListener userCenterListener = new UserCenterListener() {
+        //登陆facebook账户成功与否回调
+        @Override
+        public void onReceiveLoginResult(boolean success) {
+            asyncToast("login? " + success);
+        }
+
+        @Override
+        public void onReceiveInviteResult(boolean success) {
+            //邀请好友安装程序，游戏等回调
+            asyncToast("invite? " + success);
+        }
+
+        @Override
+        public void onReceiveChallengeResult(int count) {
+            //收到挑战结果的回调，count代表成功挑战了几位好友
+            asyncToast("challenge? " + " count: " + count);
+        }
+
+        @Override
+        public void onReceiveLikeResult(boolean success) {
+            //点赞回调，是否点赞成功
+            asyncToast("like? " + success);
+        }
+
+    };
+
+    /**
+     * 对广告操作的相关接口的监听回调
+     */
+    AdListener adListener = new AdListener() {
+        @Override
+        public void onReceiveReward(boolean success, int id) {
+            //success:是否成功显示视频广告 ,id:广告id
+            Log.e("DEMO", "receive reward " + id);
+            asyncToast("on receive reward? " + id + ", success = " + success);
+        }
+
+        @Override
+        public void onFullAdClosed() {
+            //全屏广告被关闭
+        }
+
+        @Override
+        public void onFullAdClicked() {
+            //全屏广告被点击
+        }
+
+        @Override
+        public void onVideoAdClosed() {
+            //视频广告被关闭
+        }
+
+        @Override
+        public void onBannerAdClicked() {
+            //Banner广告被点击
+        }
+
+        @Override
+        public void onCrossAdClicked() {
+            //交叉推广广告被点击
+        }
+    };
+
+    /**
+     * 使用应用内支付接口的回调
+     */
+    PaymentResultListener paymentResultListener = new PaymentResultListener() {
+        @Override
+        public void onPaymentSuccess(int billId) {
+            //支付成功 billID:计费点
+            asyncToast("payment success: " + billId);
+        }
+
+        @Override
+        public void onPaymentFail(int billId) {
+            //支付失败
+            asyncToast("payment fail: " + billId);
+        }
+
+        @Override
+        public void onPaymentCanceled(int bill) {
+            //支付取消
+            asyncToast("payment cancel: " + bill);
+        }
+
+        @Override
+        public void onPaymentSystemValid() {
+            //手机，平板等支持支付功能,支付环境有效的回调
+            Log.e("DEMO", "pay system is valid");
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,94 +163,11 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         }
 
         AndroidSdk.Builder builder = new AndroidSdk.Builder();
-        builder.setSdkResultListener(new SdkResultListener() {
-            @Override
-            public void onInitialized() {
-                asyncToast("sdk initialized");
-            }
 
-            @Override
-            public void onReceiveServerExtra(String data) {
-                asyncToast("server data: " + data);
-            }
-
-            @Override
-            public void onReceiveNotificationData(String data) {
-                asyncToast("noti: " + data);
-            }
-        }).setUserCenterListener(new UserCenterListener() {
-            @Override
-            public void onReceiveLoginResult(boolean success) {
-                asyncToast("login? " + success);
-            }
-
-            @Override
-            public void onReceiveInviteResult(boolean success) {
-                asyncToast("invite? " + success);
-            }
-
-            @Override
-            public void onReceiveChallengeResult(int count) {
-                asyncToast("challenge? " + " count: " + count);
-            }
-
-            @Override
-            public void onReceiveLikeResult(boolean success) {
-                asyncToast("like? " + success);
-            }
-
-        }).setRewardAdListener(new AdListener() {
-            @Override
-            public void onReceiveReward(boolean success, int id) {
-                Log.e("DEMO", "receive reward " + id);
-                asyncToast("on receive reward? " + id + ", success = " + success);
-            }
-
-            @Override
-            public void onFullAdClosed() {
-
-            }
-
-            @Override
-            public void onFullAdClicked() {
-
-            }
-
-            @Override
-            public void onVideoAdClosed() {
-
-            }
-
-            @Override
-            public void onBannerAdClicked() {
-
-            }
-
-            @Override
-            public void onCrossAdClicked() {
-
-            }
-        }).setPaymentResultListener(new PaymentResultListener() {
-            @Override
-            public void onPaymentSuccess(int billId) {
-                asyncToast("payment success: " + billId);
-            }
-
-            @Override
-            public void onPaymentFail(int billId) {
-                asyncToast("payment fail: " + billId);
-            }
-
-            @Override
-            public void onPaymentCanceled(int bill) {
-                asyncToast("payment cancel: " + bill);
-            }
-
-            @Override
-            public void onPaymentSystemValid() {
-                Log.e("DEMO", "pay system is valid");
-            }
-        });
+        builder.setSdkResultListener(sdkResultListener)
+                .setUserCenterListener(userCenterListener)
+                .setRewardAdListener(adListener)
+                .setPaymentResultListener(paymentResultListener);
 
         AndroidSdk.onCreate(this, builder);
 
@@ -162,48 +201,61 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start:
+                //全屏广告，与后台配置tag AndroidSdk.FULL_TAG_START,游戏开始时弹出
                 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START);
                 break;
 
             case R.id.pause:
+                //全屏广告，与后台配置tag AndroidSdk.FULL_TAG_START,游戏暂停时弹出
                 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PAUSE);
                 break;
 
             case R.id.exit:
+                //全屏广告，与后台配置tag AndroidSdk.FULL_TAG_START,游戏退出时弹出
                 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT);
                 break;
 
             case R.id.more:
+                //跳到推广的游戏列表界面
                 AndroidSdk.moreGame();
                 break;
 
             case R.id.banner:
+                //显示banner广告
                 AndroidSdk.showBanner("default", bannerPos[bannerIdx]);
                 bannerIdx = (++bannerIdx) % bannerPos.length;
                 break;
 
             case R.id.bill:
-                AndroidSdk.pay(1);
+                int billId = 1; //计费点
+                AndroidSdk.pay(billId);//支付接口，对计费点进行支付
                 break;
 
             case R.id.close_banner:
+                //关闭banner广告
                 AndroidSdk.closeBanner();
                 break;
 
             case R.id.custom:
+                //全屏广告，你可以与后台协商，自定义时机弹出广告
                 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_CUSTOM);
                 break;
 
             case R.id.pass_level:
+                //全屏广告，与后台配置tag AndroidSdk.FULL_TAG_START,游戏过关时弹出
                 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);
                 break;
 
             case R.id.free:
-                if (AndroidSdk.hasRewardAd("default")) {
+                int rewardId = 1; //客户端配置的视频广告调用时机
+                if (AndroidSdk.hasRewardAd()) { //检查后台是否有配置视频广告
+                    AndroidSdk.showRewardAd(rewardId);
+                }
+               /* if (AndroidSdk.hasRewardAd("default")) {
                     AndroidSdk.showRewardAd("default", 1);
                 } else {
                     Toast.makeText(this, "no video ad", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 break;
 
             case R.id.native_1:
@@ -219,37 +271,45 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        //facebook分享，注意此方法会阻塞主线程，需启线程调用
                         AndroidSdk.share();
                     }
                 }).start();
                 break;
 
             case R.id.islogin:
+                //是否登陆facebook账户
                 toast("is login: " + AndroidSdk.isLogin());
                 break;
 
             case R.id.login:
+                //登陆facebook账户
                 AndroidSdk.login();
                 break;
 
             case R.id.logout:
+                //退出facebook账户
                 AndroidSdk.logout();
                 break;
 
             case R.id.invite:
+                //facebook邀请好友安装应用，游戏等
                 AndroidSdk.invite();
                 break;
 
             case R.id.challenge:
+                //向你的facebook朋友发出挑战
                 AndroidSdk.challenge("haha title", "heihei message");
                 break;
 
             case R.id.friends:
+                //获取faceook朋友信息列表
                 toast(AndroidSdk.friends());
                 break;
 
             case R.id.me: {
                 try {
+                    //获取我的faceook个人信息
                     String me1 = AndroidSdk.me();
                     JSONObject me = new JSONObject(me1);
                     if (me.has("picture")) {
@@ -269,6 +329,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             break;
 
             case R.id.like:
+                //facebook点赞
                 AndroidSdk.like();
                 break;
 //
@@ -295,6 +356,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                     AndroidSdk.showNativeBanner("unlock_pre", 50, 50);
                 }
                 nativeBannerShowing = !nativeBannerShowing;
+                break;
+            default:
                 break;
         }
     }
