@@ -125,13 +125,39 @@ AndroidSdk.invite();
  AndroidSdk.challenge("haha title", "heihei message");
  ```
 * 获取faceook朋友信息列表
+
 ```java
  String friendsJson = AndroidSdk.friends()；
-  ```
+ //返回的json格式如下：
+ [
+ {
+ "id":"0000000000000001",//我的facebook好友1的账户id
+ "name":"Friend 1",//我的facebook好友1的账户名称
+ "picture":"/data/empty_not_exists1"//我的facebook好友1个人头像本地保存的绝对路径
+ },
+ {
+  "id":"0000000000000002",//我的facebook好友2的账户id
+ "name":"Friend 2",//我的facebook好友2的账户名称
+ "picture":"/data/empty_not_exists2"//我的facebook好友2个人头像本地保存的绝对路径
+ },
+ {
+ "id":"0000000000000003",//我的facebook好友3的账户id
+ "name":"Friend 3",//我的facebook好友3的账户名称
+ "picture":"/data/empty_not_exists3"//我的facebook好友3个人头像本地保存的绝对路径
+ }
+ ]
+ ```
 * 获取我的faceook个人信息
+
 ```java
 String meJson = AndroidSdk.me();
- ```
+//返回的json格式如下：
+ {
+ "id":"0000000000000000",//我的facebook账户id
+ "name":"Me is me",//我的facebook账户名称
+ "picture":"/data/empty_not_exists"//我的facebook账户个人图片本地保存的绝对路径
+ }
+  ```
 * 退出facebook账户
 ```java
  AndroidSdk.logout();
@@ -266,6 +292,11 @@ builder.setPaymentResultListener(new PaymentResultListener() {
   });
   ```
 ## 11，提供友盟统计相关接口
+* 统计玩家等级
+```java
+int level = 1; //玩家等级
+AndroidSdk.UM_setPlayerLevel(level);//统计进入商店页面
+```
 * 统计进入某页面
 ```java
 String pageName = "Shop"; 
@@ -338,6 +369,35 @@ int number = 5;//奖励道具数量
 double price = 99.0;//奖励道具价格
 int trigger = 1;//触发奖励的事件, 取值在 1~10 之间，“1”已经被预先定义为“系统奖励”， 2~10 需要在网站设置含义
 AndroidSdk.UM_bonus(itemName,number,price,trigger); 
+```
+## 12，我们额外还提供以下接口：
+* 判断网络是否连接
+```java
+boolean isNetworkConnected = AndroidSdk.isNetworkConnected();
+```
+* 弹出android原生toast提示
+```java
+String messageContent="我是toast消息内容";
+AndroidSdk.toast(messageContent);
+```
+* 弹出android原生alert dialog
+```java
+String title = "我是标题";
+String message = "我是内容";
+AndroidSdk.alert(title,message);
+```
+* 游戏，应用程序退出
+```java
+AndroidSdk.onQuit();
+```
+* 缓存文件
+```java
+String url = "http://xxxx.png";//文件下载连接
+String path = AndroidSdk.cacheUrl(url); //返回保存文件的绝对路径（/sdcard/0/.cache/383292918283483291）
+```
+* 给应用，游戏等五星好评
+```java
+AndroidSdk.rateUs();
 ```
 
   
