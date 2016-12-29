@@ -399,5 +399,10 @@ String path = AndroidSdk.cacheUrl(url); //返回保存文件的绝对路径（/s
 ```java
 AndroidSdk.rateUs();
 ```
-
+* 给应用，游戏等加Google Analytics统计
+```java
+AndroidSdk.track("shop"); //统计商店页面
+AndroidSdk.track("shop","buy"); //商店页面购买装备统计
+AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
+```
   
