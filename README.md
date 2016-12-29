@@ -316,7 +316,7 @@ AndroidSdk.UM_onEvent(eventId);
 ```java
 String eventId = "EnterGame"; //事件名称
 String eventLabel = "eventLable";//事件的某个操作标签
-AndroidSdk.UM_onEvent("EnterGame", "openGift");
+AndroidSdk.UM_onEvent(eventId, eventLabel);
 ```
 * 统计事件详细分组内容
 ```java
