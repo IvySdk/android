@@ -85,7 +85,7 @@
         super.onDestroy();
     }
 ```
-## 4，提供以下样式广告的api以及回调:
+## 4，以下类型广告的api以及回调:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -94,8 +94,8 @@ AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_PASS_LEVEL);//游戏过关
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_EXIT); //游戏退出
 AndroidSdk.showFullAd("xxx"); //您还可以自定义类型广告
 ``` 
- 注意：以上类型广告的弹出不要在activity的生命周期onResume()和onPause()中调用
-  
+ 注意：不要在activity的生命周期onResume()和onPause()中调用弹出全屏广告
+  
 * banner广告
 ```java
 int[] bannerPos = {
@@ -152,7 +152,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 5, 提供对faceook相关操作的api以及回调
+## 5, faceook相关操作的接口以及回调
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -245,7 +245,7 @@ builder.setUserCenterListener(new UserCenterListener() {
  });
  ```
 
-## 6,提供应用内支付的接口以及回调，后台配置计费点 ：
+## 6,应用内支付的接口以及回调，后台配置计费点 ：
 ```java
 int billId = 1; //计费点
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
@@ -281,7 +281,7 @@ builder.setPaymentResultListener(new PaymentResultListener() {
             }
   });
 ```
-## 7，提供友盟统计相关接口
+## 7，友盟统计相关接口
 * 统计玩家等级
 ```java
 int level = 1; //玩家等级
