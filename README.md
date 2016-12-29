@@ -28,11 +28,30 @@
     public *;
 }
 ```
-## 3,在Activity中初始化Android SDK,构造AndroidSDK builder对象
+## 3,在Activity中初始化Android SDK,构造AndroidSDK builder对象，提供初始化完成回调
 ```java
   @Override
     protected void onCreate() {
        AndroidSdk.Builder builder = new AndroidSdk.Builder();
+       builder.setSdkResultListener(new SdkResultListener() {
+            @Override
+            public void onInitialized() {
+                 //sdk初始化成功接口
+                 Log.e("DEMO","sdk initialized");
+            }
+
+            @Override
+            public void onReceiveServerExtra(String data) {
+                 // 初始化成功后收到服务器回传数据
+                 Log.e("DEMO","server data: " + data);
+            }
+
+            @Override
+            public void onReceiveNotificationData(String data) {
+                 //初始化成功后收到通知数据
+                 Log.e("DEMO","noti: " + data);
+            }
+        })
        AndroidSdk.onCreate(this, builder); //onCreate方法中调用
     }
   @Override
@@ -65,7 +84,7 @@
         super.onDestroy();
     }
 ```
-## 4，提供以下样式广告的api:
+## 4，提供以下样式广告的api以及回调:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -77,7 +96,6 @@ AndroidSdk.showFullAd("xxx"); //您还可以自定义类型广告
  注意：以上类型广告的弹出不要在activity的生命周期onResume()和onPause()中调用
   
 * banner广告
-
 ```java
 int[] bannerPos = {
             AndroidSdk.POS_CENTER,      //居中显示banner广告
@@ -98,8 +116,42 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
     AndroidSdk.showRewardAd(rewardId);
 }
 ```
- 
-## 5, 提供对faceook相关操作的api	
+* 广告相关回调
+```java
+builder.setRewardAdListener(new AdListener() {
+            @Override
+            public void onReceiveReward(boolean success, int id) {
+                //success:是否成功显示视频广告 ,id:广告id
+                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
+            }
+
+            @Override
+            public void onFullAdClosed() {
+                //全屏广告被关闭
+            }
+
+            @Override
+            public void onFullAdClicked() 
+                //全屏广告被点击
+            }
+
+            @Override
+            public void onVideoAdClosed() {
+                //视频广告被关闭
+            }
+
+            @Override
+            public void onBannerAdClicked() {
+                //Banner广告被点击
+            }
+
+            @Override
+            public void onCrossAdClicked() {
+                //交叉推广广告被点击
+            }
+});
+```
+## 5, 提供对faceook相关操作的api以及回调
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -162,40 +214,8 @@ String meJson = AndroidSdk.me();
 ```java
  AndroidSdk.logout();
  ```
-## 6,提供使用应用内支付的api，后台配置计费点 ：
-```java
-int billId = 1; //计费点
-AndroidSdk.pay(billId);//支付接口，对计费点进行支付
-AndroidSdk.query(billId);//查询支付结果
-```
-## 7,提供对sdk初始化相关接口的监听回调：
-* sdk初始化成功接口
-* 初始化成功后收到服务器回传数据
-* 初始化成功后收到通知数据
-```java
-builder.setSdkResultListener(new SdkResultListener() {
-            @Override
-            public void onInitialized() {
-                 //sdk初始化成功接口
-                 Log.e("DEMO","sdk initialized");
-            }
-
-            @Override
-            public void onReceiveServerExtra(String data) {
-                 // 初始化成功后收到服务器回传数据
-                 Log.e("DEMO","server data: " + data);
-            }
-
-            @Override
-            public void onReceiveNotificationData(String data) {
-                 //初始化成功后收到通知数据
-                 Log.e("DEMO","noti: " + data);
-            }
- })
-```
-## 8,提供对facebook用户相关接口的监听回调:
-
-```java
+* facebook接口回调：
+ ```java
 builder.setUserCenterListener(new UserCenterListener() {
             @Override
             public void onReceiveLoginResult(boolean success) {
@@ -223,43 +243,12 @@ builder.setUserCenterListener(new UserCenterListener() {
 
  });
  ```
-## 9,提供对广告操作的相关接口的监听回调
+
+## 6,提供应用内支付的接口以及回调，后台配置计费点 ：
 ```java
-builder.setRewardAdListener(new AdListener() {
-            @Override
-            public void onReceiveReward(boolean success, int id) {
-                //success:是否成功显示视频广告 ,id:广告id
-                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
-            }
-
-            @Override
-            public void onFullAdClosed() {
-                //全屏广告被关闭
-            }
-
-            @Override
-            public void onFullAdClicked() 
-                //全屏广告被点击
-            }
-
-            @Override
-            public void onVideoAdClosed() {
-                //视频广告被关闭
-            }
-
-            @Override
-            public void onBannerAdClicked() {
-                //Banner广告被点击
-            }
-
-            @Override
-            public void onCrossAdClicked() {
-                //交叉推广广告被点击
-            }
-});
-```
-## 10,提供使用应用内支付接口的回调 
-```java
+int billId = 1; //计费点
+AndroidSdk.pay(billId);//支付接口，对计费点进行支付
+AndroidSdk.query(billId);//查询支付结果
 /**
 * AndroidSdk.pay(billId);//支付接口，对计费点进行支付
   AndroidSdk.query(billId);//查询支付结果
@@ -290,8 +279,8 @@ builder.setPaymentResultListener(new PaymentResultListener() {
                 Log.d("DEMO", "pay system is valid");
             }
   });
-  ```
-## 11，提供友盟统计相关接口
+```
+## 7，提供友盟统计相关接口
 * 统计玩家等级
 ```java
 int level = 1; //玩家等级
@@ -370,7 +359,7 @@ double price = 99.0;//奖励道具价格
 int trigger = 1;//触发奖励的事件, 取值在 1~10 之间，“1”已经被预先定义为“系统奖励”， 2~10 需要在网站设置含义
 AndroidSdk.UM_bonus(itemName,number,price,trigger); 
 ```
-## 12，我们额外还提供以下接口：
+## 8，我们额外还提供以下接口：
 * 判断网络是否连接
 ```java
 boolean isNetworkConnected = AndroidSdk.isNetworkConnected();
@@ -405,7 +394,7 @@ AndroidSdk.track("shop"); //统计商店页面
 AndroidSdk.track("shop","buy"); //商店页面购买装备统计
 AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
-## 13，demo中有对接口的详细注释，如果您看完demo后还有不明白之处，您可以发送邮件至appdev@ivymobile.com进行咨询！谢谢！
+## 9，demo中有对接口的详细注释，如果您看完demo后还有不明白之处，您可以发送邮件至appdev@ivymobile.com进行咨询！谢谢！
 
 
 
