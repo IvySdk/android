@@ -295,7 +295,7 @@ builder.setPaymentResultListener(new PaymentResultListener() {
 * 统计玩家等级
 ```java
 int level = 1; //玩家等级
-AndroidSdk.UM_setPlayerLevel(level);//统计进入商店页面
+AndroidSdk.UM_setPlayerLevel(level);//统计玩家等级
 ```
 * 统计进入某页面
 ```java
