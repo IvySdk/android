@@ -51,9 +51,10 @@
                  //初始化成功后收到通知数据
                  Log.e("DEMO","noti: " + data);
             }
-        })
-       AndroidSdk.onCreate(this, builder); //onCreate方法中调用
+        });
+       AndroidSdk.onCreate(this, builder); 
     }
+    
   @Override
     protected void onStart() {
         super.onStart();
@@ -116,7 +117,7 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
     AndroidSdk.showRewardAd(rewardId);
 }
 ```
-* 广告相关回调
+* 广告相关操作回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
