@@ -346,7 +346,7 @@ double money = 5.0; //内付的金额
 String itemName = "钻石"; //内付购买的商品名称
 int number = 10;//内付购买的商品数量
 double price = 99.0;//内付购买的商品价格
-AndroidSdk.UM_pay(level); 
+AndroidSdk.UM_pay(money,itemName,number,price);
 ```
 * 购买道具统计
 ```java
@@ -358,7 +358,7 @@ AndroidSdk.UM_buy(itemName,count,price);
 * 使用道具统计
 ```java
 String itemName = "血瓶"; //使用道具名称
-int number = 10;//使用道具数量
+int count = 10;//使用道具数量
 double price = 99.0;//使用道具价格
 AndroidSdk.UM_use(itemName,count,price); 
 ```
