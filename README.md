@@ -395,7 +395,5 @@ AndroidSdk.track("shop"); //统计商店页面
 AndroidSdk.track("shop","buy"); //商店页面购买装备统计
 AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
-## 9，demo中有对接口的详细注释，如果您看完demo后还有不明白之处，您可以发送邮件到appdev@ivymobile.com.
-
-
+## 9，demo中有对接口的详细注释，如您看完demo后还有不明白之处，可发送邮件到appdev@ivymobile.com，我们会尽快给您回复！谢谢！
   
