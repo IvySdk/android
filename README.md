@@ -85,7 +85,7 @@
         super.onDestroy();
     }
 ```
-## 4，以下类型广告的api以及回调:
+## 4，广告相关接口以及回调:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
 ```java
 AndroidSdk.showFullAd(AndroidSdk.FULL_TAG_START); //游戏开始时
@@ -117,7 +117,7 @@ if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
     AndroidSdk.showRewardAd(rewardId);
 }
 ```
-* 广告相关操作回调
+* 广告回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
@@ -152,7 +152,7 @@ builder.setRewardAdListener(new AdListener() {
             }
 });
 ```
-## 5, faceook相关操作的接口以及回调
+## 5, faceook接口以及回调
 * 登陆facebook账户
 ```java
 AndroidSdk.login();
@@ -395,8 +395,7 @@ AndroidSdk.track("shop"); //统计商店页面
 AndroidSdk.track("shop","buy"); //商店页面购买装备统计
 AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
-## 9，demo中有对接口的详细注释，如果您看完demo后还有不明白之处，您可以发送邮件至appdev@ivymobile.com进行咨询！谢谢！
-
+## 9，demo中有对接口的详细注释，如果您看完demo后还有不明白之处，您可以发送邮件到appdev@ivymobile.com.
 
 
   
