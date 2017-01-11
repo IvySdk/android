@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.util.HashMap;
-import java.util.Random;
 
 /**
  * Created by song on 16/5/26.
@@ -468,7 +467,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
          */
         String eventId = "EnterGame"; //事件名称
         String eventLabel = "eventLable";//事件的某个操作标签
-        AndroidSdk.UM_onEvent("EnterGame", "openGift");
+        AndroidSdk.UM_onEvent(eventId, eventLabel);
         /**
          *统计事件详细分组内容
          */
