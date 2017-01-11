@@ -1,0 +1,249 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="全屏广告" />
+
+            <Button
+                android:id="@+id/video_ad"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="视频广告" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="显示banner广告" />
+
+            <Button
+                android:id="@+id/close_banner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="关闭banner广告" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/bill"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="应用内支付" />
+
+            <Button
+                android:id="@+id/more"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="更多游戏推广界面" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/native_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="native 1"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="facebook分享" />
+
+            <Button
+                android:id="@+id/like"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="facebook点赞" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="登陆facebook账户" />
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="退出facebook账户" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/invite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="邀请facebook好友" />
+
+            <Button
+                android:id="@+id/challenge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="向facebook好友发起挑战" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/me"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="获取我的facebook个人信息" />
+
+            <Button
+                android:id="@+id/friends"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="获取我的facebook朋友列表" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/islogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="facebook账户是否登陆？" />
+
+            <Button
+                android:id="@+id/test_umeng"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="测试友盟统计" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/submit_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="submit score" />
+
+            <Button
+                android:id="@+id/load_friend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="load friends" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/load_global"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="load global" />
+
+            <Button
+                android:id="@+id/show_sales"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="show sales" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/show_native_banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="native banner" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
