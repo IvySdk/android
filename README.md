@@ -100,8 +100,8 @@ AndroidSdk.showFullAd("xxx"); //您还可以自定义类型广告
 ```java
 int[] bannerPos = {
             AndroidSdk.POS_CENTER,      //居中显示banner广告
-            AndroidSdk.POS_CENTER_BOTTOM, //中间底部显示banner广告
-            AndroidSdk.POS_CENTER_TOP, //中间底部显示banner广告
+            AndroidSdk.POS_CENTER_BOTTOM, //底部居中显示banner广告
+            AndroidSdk.POS_CENTER_TOP, //顶部居中显示banner广告
             AndroidSdk.POS_LEFT_BOTTOM, //左下角显示banner广告
             AndroidSdk.POS_LEFT_TOP, //左上角显示banner广告
             AndroidSdk.POS_RIGHT_BOTTOM, //右下角显示banner广告
@@ -112,17 +112,17 @@ int[] bannerPos = {
  ```
 * 视频广告
 ```java
-int rewardId = 1; //客户端配置的视频广告调用时机
-if(AndroidSdk.hasRewardAd()){ //检查后台是否有配置视频广告
-    AndroidSdk.showRewardAd(rewardId);
+int rewardId = 1; //客户端配置的视频广告奖励id，自定义即可，依据这个id决定给玩家奖励什么物品，以及数量等
+if(AndroidSdk.hasRewardAd()){ //检查是否有视频广告
+    AndroidSdk.showRewardAd(rewardId); //展示视频广告
 }
 ```
 * 广告回调
 ```java
 builder.setRewardAdListener(new AdListener() {
             @Override
-            public void onReceiveReward(boolean success, int id) {
-                //success:是否成功显示视频广告 ,id:广告id
+            public void onReceiveReward(boolean success, int rewardId) {
+                //success:是否成功显示视频广告 ,rewardId: 视频广告的奖励id
                 Log.e("DeMO","on receive reward? " + id + ", success = " + success);
             }
 
@@ -163,7 +163,7 @@ boolean isLogin = AndroidSdk.isLogin()
  ```
 * facebook分享
 ```java
- AndroidSdk.share(); //注意此方法会阻塞主线程，需启线程调用
+ AndroidSdk.share(); 
  ```
 * facebook点赞
 ```java
@@ -247,7 +247,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 
 ## 6,应用内支付的接口以及回调，后台配置计费点 ：
 ```java
-int billId = 1; //计费点
+int billId = 1; //计费点，和运营人员确定即可
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
 AndroidSdk.query(billId);//查询支付结果
 /**
