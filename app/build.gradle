@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.privacy.newsreader"
+        minSdkVersion 9
+        targetSdkVersion 9
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "PRINT_LOG", "true"
+            jniDebuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            multiDexEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        release_test {
+            buildConfigField "boolean", "PRINT_LOG", "true"
+            jniDebuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
+            multiDexEnabled false
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+        release {
+            //混淆
+            buildConfigField "boolean", "PRINT_LOG", "false"
+            jniDebuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
+            multiDexEnabled false
+            // 移除无用的resource文件
+            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+    }
+
+}
+
+dependencies {
+    compile files('libs/risesdk.jar')
+}
