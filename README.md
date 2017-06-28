@@ -85,6 +85,12 @@ English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
         AndroidSdk.onDestroy();
         super.onDestroy();
     }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        AndroidSdk.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 ```
 ## 4，广告相关接口以及回调:
 * 全屏广告，需配置不同时机弹出的广告，以便于后台统计,我们预定义了以下几种时机弹出的广告：
