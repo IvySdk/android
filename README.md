@@ -234,9 +234,9 @@ int billId = 1; //计费点，和运营人员确定即可
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
 AndroidSdk.query(billId);//查询支付结果
 /**
-* AndroidSdk.pay(billId);//支付接口，对计费点进行支付
-  AndroidSdk.query(billId);//查询支付结果
-  PaymentResultListener是以上两个接口的回调类
+* AndroidSdk.pay(billId); //支付接口，对计费点进行支付
+  AndroidSdk.query(billId); //查询支付结果
+  PaymentSystemListener 是以上两个接口的回调类
 */
 builder.setPaymentListener(new PaymentSystemListener() {
             @Override
