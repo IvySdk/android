@@ -78,6 +78,11 @@ public class SplashActivity extends Activity implements View.OnClickListener {
             asyncToast(success ? "登陆成功" : "登陆失败");
         }
 
+        @Override
+        public void onReceiveFriends(String s) {
+            asyncToast("friends: " + s);
+        }
+
         /**
          * {@link AndroidSdk#invite()} SDK邀请好友接口的回调
          * 是否成功邀请好友安装程序，游戏等
@@ -111,60 +116,48 @@ public class SplashActivity extends Activity implements View.OnClickListener {
     };
 
     /**
-     * 使用方法：{@link com.android.client.AndroidSdk.Builder#setRewardAdListener(AdListener)}
      * 对广告操作的相关接口的监听回调
      */
     private AdListener adListener = new AdListener() {
-        /**
-         * {@link AndroidSdk#showRewardAd(int)}
-         * @param success 是否成功显示视频广告
-         * @param id 与后台配置的广告显示id
-         */
         @Override
-        public void onReceiveReward(boolean success, int id) {
-            Log.e("DEMO", "receive reward " + id);
-            asyncToast(success ? "视频广告显示成功，广告id:" + id : "视频广告显示失败");
+        public void onAdShow() {
+            super.onAdShow();
         }
 
-        /**
-         * 全屏广告被关闭
-         */
         @Override
-        public void onFullAdClosed() {
-            asyncToast("全屏广告被关闭");
+        public void onAdClosed() {
+            super.onAdClosed();
         }
 
-        /**
-         * 全屏广告被点击
-         */
         @Override
-        public void onFullAdClicked() {
-            asyncToast("全屏广告被点击");
+        public void onAdClicked() {
+            super.onAdClicked();
         }
 
-        /**
-         * 视频广告被关闭
-         */
         @Override
-        public void onVideoAdClosed() {
-            asyncToast("视频广告被关闭");
+        public void onAdShowFails() {
+            super.onAdShowFails();
         }
 
-        /**
-         * Banner广告被点击
-         */
+        /*
+        * {@link AndroidSdk#showRewardAd(String, AdListener)}
+        */
         @Override
-        public void onBannerAdClicked() {
-            asyncToast("Banner广告被点击");
+        public void onAdReward() {
+            super.onAdReward();
+            asyncToast("视频广告显示成功");
         }
 
-        /**
-         * 交叉推广广告被点击
-         */
         @Override
-        public void onCrossAdClicked() {
-            asyncToast("交叉推广广告被点击");
+        public void onAdLoadSuccess() {
+            super.onAdLoadSuccess();
         }
+
+        @Override
+        public void onAdLoadFails() {
+            super.onAdLoadFails();
+        }
+
     };
 
     /**
@@ -174,7 +167,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
      * {@link AndroidSdk#query(int)};//查询支付结果
      * PaymentResultListener是以上两个接口的回调类
      */
-    PaymentResultListener paymentResultListener = new PaymentResultListener() {
+    PaymentSystemListener paymentResultListener = new PaymentSystemListener() {
         /**
          * 支付成功
          * @param billId 计费点
@@ -232,8 +225,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
 
         builder.setSdkResultListener(sdkResultListener)
                 .setUserCenterListener(userCenterListener)
-                .setRewardAdListener(adListener)
-                .setPaymentResultListener(paymentResultListener);
+                .setPaymentListener(paymentResultListener);
 
         AndroidSdk.onCreate(this, builder);
 
@@ -275,7 +267,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                  * {@link AndroidSdk#POS_RIGHT_BOTTOM} 右下角显示
                  * {@link AndroidSdk#POS_RIGHT_TOP} 右上角显示
                  */
-                AndroidSdk.showBanner(AndroidSdk.POS_CENTER);
+                AndroidSdk.showBanner("main", AndroidSdk.POS_CENTER);
                 break;
 
             case R.id.bill:
@@ -291,7 +283,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 /**
                  * 关闭banner广告
                  */
-                AndroidSdk.closeBanner();
+                AndroidSdk.closeBanner("main");
                 break;
 
             case R.id.video_ad:
@@ -299,8 +291,13 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                  * 显示视频广告
                  */
                 int rewardId = 1; //客户端配置的视频广告调用时机
-                if (AndroidSdk.hasRewardAd()) { //检查后台是否有配置视频广告
-                    AndroidSdk.showRewardAd(rewardId);
+                if (AndroidSdk.hasRewardAd("shop")) { //检查后台是否有配置视频广告
+                    AndroidSdk.showRewardAd("shop", new AdListener(){
+                        @Override
+                        public void onAdReward() {
+                            asyncToast("shop reward video is played");
+                        }
+                    });
                 }
                /* if (AndroidSdk.hasRewardAd("default")) {
                     AndroidSdk.showRewardAd("default", 1);
