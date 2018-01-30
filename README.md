@@ -115,50 +115,21 @@ int[] bannerPos = {
             AndroidSdk.POS_RIGHT_TOP //右上角显示banner广告
  };
  AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
- AndroidSdk.closeBanner(); //关闭banner广告
+ AndroidSdk.closeBanner("default"); //关闭banner广告
  ```
 * 视频广告
 ```java
 int rewardId = 1; //客户端配置的视频广告奖励id，自定义即可，依据这个id决定给玩家奖励什么物品，以及数量等
-if(AndroidSdk.hasRewardAd()){ //检查是否有视频广告
-    AndroidSdk.showRewardAd(rewardId); //展示视频广告
+if(AndroidSdk.hasRewardAd("shop")){ //检查是否有视频广告
+    AndroidSdk.showRewardAd("shop", new AdListener(){
+        @Override
+        public void onAdReward() {
+            asyncToast("shop reward video is played");
+        }
+    }); //展示视频广告
 }
 ```
-* 广告回调
-```java
-builder.setRewardAdListener(new AdListener() {
-            @Override
-            public void onReceiveReward(boolean success, int rewardId) {
-                //success:是否成功显示视频广告 ,rewardId: 视频广告的奖励id
-                Log.e("DeMO","on receive reward? " + id + ", success = " + success);
-            }
 
-            @Override
-            public void onFullAdClosed() {
-                //全屏广告被关闭
-            }
-
-            @Override
-            public void onFullAdClicked() 
-                //全屏广告被点击
-            }
-
-            @Override
-            public void onVideoAdClosed() {
-                //视频广告被关闭
-            }
-
-            @Override
-            public void onBannerAdClicked() {
-                //Banner广告被点击
-            }
-
-            @Override
-            public void onCrossAdClicked() {
-                //交叉推广广告被点击
-            }
-});
-```
 ## 5, faceook接口以及回调
 * 登陆facebook账户
 ```java
@@ -249,6 +220,11 @@ builder.setUserCenterListener(new UserCenterListener() {
                   Log.e("DEMO","like? " + success);
             }
 
+            @Override
+            public void onReceiveFriends(String s) {
+                asyncToast("friends: " + s);
+            }
+
  });
  ```
 
@@ -262,7 +238,7 @@ AndroidSdk.query(billId);//查询支付结果
   AndroidSdk.query(billId);//查询支付结果
   PaymentResultListener是以上两个接口的回调类
 */
-builder.setPaymentResultListener(new PaymentResultListener() {
+builder.setPaymentListener(new PaymentSystemListener() {
             @Override
             public void onPaymentSuccess(int billId) {
                 //支付成功
