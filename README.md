@@ -344,6 +344,24 @@ int trigger = 1;//触发奖励的事件, 取值在 1~10 之间，“1”已经�
 AndroidSdk.UM_bonus(itemName,number,price,trigger); 
 ```
 ## 8，我们额外还提供以下接口：
+* 提供给欧盟区的设置: 在应用的设置页面提供一个设置项，让用户可以设置广告相关的策略
+```java
+// 判断该用户是否是欧盟区的
+AndroidSdk.hasGDPR()
+
+// 显示广告设置页面
+AndroidSdk.resetGDPR();
+
+// 使用场景
+如果是欧盟区的用户，你需要提供一个设置项
+if (AndroidSdk.hasGDPR()){
+    // 这里展示你们自己的设置项 UI
+    // 如果用户点击了你们的设置项，
+    // 则你们需要调用 AndroidSdk.resetGDPR() 来展示广告设置
+    // 广告设置我们已经做好了，你们不需要自己另做界面
+}
+```
+
 * 判断网络是否连接
 ```java
 boolean isNetworkConnected = AndroidSdk.isNetworkConnected();

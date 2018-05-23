@@ -232,16 +232,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/show_native_banner"
+                android:id="@+id/show_gdpr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="native banner" />
+                android:text="reset GDPR" />
 
         </LinearLayout>
     </LinearLayout>

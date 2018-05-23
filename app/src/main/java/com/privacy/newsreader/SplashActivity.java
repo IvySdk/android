@@ -434,6 +434,14 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.test_umeng:
                 testUMeng();
+
+                break;
+
+            case R.id.show_gdpr:
+                if (AndroidSdk.hasGDPR()) {
+                    AndroidSdk.resetGDPR();
+                }
+                break;
             /*case R.id.show_native_banner:
                 if (nativeBannerShowing) {
                     AndroidSdk.hideNativeBanner("unlock_pre");
