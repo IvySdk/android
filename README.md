@@ -1,4 +1,5 @@
 #  android sdk 文档
+# 当前版本：5.2.21
 English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
 ## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中进行引用
 ![Copy](/capture/android_pic1.bmp)
@@ -53,7 +54,8 @@ English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
                  Log.e("DEMO","noti: " + data);
             }
         });
-       AndroidSdk.onCreate(this, builder); 
+       AndroidSdk.onCreate(this, builder);
+       AndroidSdk.registerAdEventListener(new AdEventListener());
     }
     
   @Override
