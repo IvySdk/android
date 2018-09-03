@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by song on 16/5/26.
@@ -228,6 +229,27 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 .setPaymentListener(paymentResultListener);
 
         AndroidSdk.onCreate(this, builder);
+        AndroidSdk.registerAdEventListener(new AdEventListener(){
+            @Override
+            public void onAdShow(String tag, String platform, int type) {
+                super.onAdShow(tag, platform, type);
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("platform", platform);
+                map.put("adPos", tag);
+                AndroidSdk.track("adShow", map);
+            }
+
+            @Override
+            public void onAdClicked(String tag, String platform, int type) {
+                super.onAdClicked(tag, platform, type);
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("platform", platform);
+                map.put("adPos", tag);
+                AndroidSdk.track("adClicked", map);
+            }
+        });
 
         setContentView(R.layout.main);
     }
