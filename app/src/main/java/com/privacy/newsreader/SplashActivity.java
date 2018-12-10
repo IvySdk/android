@@ -144,8 +144,8 @@ public class SplashActivity extends Activity implements View.OnClickListener {
         * {@link AndroidSdk#showRewardAd(String, AdListener)}
         */
         @Override
-        public void onAdReward() {
-            super.onAdReward();
+        public void onAdReward(boolean skip) {
+            super.onAdReward(skip);
             asyncToast("视频广告显示成功");
         }
 
@@ -316,7 +316,7 @@ public class SplashActivity extends Activity implements View.OnClickListener {
                 if (AndroidSdk.hasRewardAd("shop")) { //检查后台是否有配置视频广告
                     AndroidSdk.showRewardAd("shop", new AdListener(){
                         @Override
-                        public void onAdReward() {
+                        public void onAdReward(boolean skip) {
                             asyncToast("shop reward video is played");
                         }
                     });

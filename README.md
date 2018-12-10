@@ -125,7 +125,7 @@ int rewardId = 1; //客户端配置的视频广告奖励id，自定义即可，�
 if(AndroidSdk.hasRewardAd("shop")){ //检查是否有视频广告
     AndroidSdk.showRewardAd("shop", new AdListener(){
         @Override
-        public void onAdReward() {
+        public void onAdReward(boolean skip) {
             asyncToast("shop reward video is played");
         }
     }); //展示视频广告
