@@ -266,6 +266,31 @@ builder.setPaymentListener(new PaymentSystemListener() {
             }
   });
 ```
+ V2以后支付成功以后，会同步回调配置的游戏服务器接口(可选），可以在此接口中实现游戏发货，进一步校验的逻辑。会上传如下参数
+```
+// 所在的国家
+.add("country", countryCode)
+// 用户购买的Google SKU
+.add("sku", purchase.getSku())
+// billId
+.add("payId", String.valueOf(billId))
+// 订单号
+.add("orderId", purchase.getOrderId())
+.add("purchaseTime", String.valueOf(purchase.getPurchaseTime()))
+// purchaseToken可以用来自行向google服务器监听购买的通知，比如退款等
+.add("purchaseToken", purchase.getPurchaseToken())
+.add("purchaseState", String.valueOf(purchase.getPurchaseState()))
+.add("uuid", IvySdk.getUUID())
+.add("packageName", purchase.getPackageName())
+.add("jsonData", purchase.getOriginalJson())
+.add("signature", purchase.getSignature())
+.add("sku_json", skuDetail != null ? skuDetail.toString() : "{}")
+.add("appid", appid != null ? appid : "")
+// 可选，如果使用pay(billId, payload)接口，将提交
+.add("payload", payload)
+```
+游戏服务器接口，需要使用返回一个加密的json字符串（请联系），再强校验的情况下，SDK会检查status字段，明确为1才会回调onPaymentSuccess的客户端回调。
+ 
 ## 7，友盟统计相关接口
 * 统计玩家等级
 ```java
