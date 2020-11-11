@@ -292,6 +292,9 @@ builder.setPaymentListener(new PaymentSystemListener() {
 游戏服务器接口，需要使用返回一个加密的json字符串（请联系），再强校验的情况下，SDK会检查status字段，明确为1才会回调onPaymentSuccess的客户端回调。
 payload: 客户端通过pay(billId, payload)接口调用支付接口，对接的服务器接口将上传payload, payload可以加密保存一些支付的用户信息，用于后续的校验或发货。 
 
+服务器可以对jsonData进行验签，防止数据被修改 参考：
+https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
+
 ## 7，友盟统计相关接口
 * 统计玩家等级
 ```java
