@@ -295,6 +295,8 @@ payload: 客户端通过pay(billId, payload)接口调用支付接口，对接的
 服务器可以对jsonData进行验签，防止数据被修改 参考：
 https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
 
+https://stackoverflow.com/questions/30420847/verification-google-play-purchase-from-server-side
+
 ## 7，友盟统计相关接口
 * 统计玩家等级
 ```java
