@@ -311,6 +311,7 @@ https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
 https://stackoverflow.com/questions/30420847/verification-google-play-purchase-from-server-side
 
 AndroidSdk.getPrices函数返回以billId为key的本地化json字符串
+注意: 此函数返回的数据依赖于Google Play的连接，所以游戏刚打开的时候可能没有。
 
 ```java
     /// 返回json数据，格式为：
