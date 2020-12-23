@@ -77,8 +77,8 @@ English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         AndroidSdk.onResume(this);
     }
 
