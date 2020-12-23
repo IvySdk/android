@@ -336,7 +336,7 @@ AndroidSdk.getPrices函数返回以billId为key的本地化json字符串
     ///         "desc": "VIP Privilege"
     ///     }
     /// }
-```java
+```
 
 ## 7，友盟统计相关接口
 * 统计玩家等级
