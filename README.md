@@ -310,6 +310,34 @@ https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
 
 https://stackoverflow.com/questions/30420847/verification-google-play-purchase-from-server-side
 
+AndroidSdk.getPrices函数返回以billId为key的本地化json字符串
+
+```java
+    /// 返回json数据，格式为：
+    /// 22 23 等是计费点
+    /// price_amount 一般用于计算折扣，当前的价格是打折后的价格，通过折扣来计算原价，展示给用户
+    /// {
+    ///     "22": {
+    ///         "id": "com.ivy.galaxyshooting.sky22",
+    ///         "type": "inapp",
+    ///         "price": "HK$15.00",
+    ///         "price_amount": 15.0,
+    ///         "currency": "HKD",
+    ///         "title": " remove Ads +2000 coins (Galaxy sky shooting)",
+    ///         "desc": " remove Ads +2000 coins"
+    ///     },
+    ///     "23": {
+    ///         "id": "com.ivy.galaxyshooting.sky23",
+    ///         "type": "subs",
+    ///         "price": "HK$15.00",
+    ///         "price_amount": 15.0,
+    ///         "currency": "HKD",
+    ///         "title": "VIP Privilege (Galaxy sky shooting)",
+    ///         "desc": "VIP Privilege"
+    ///     }
+    /// }
+```java
+
 ## 7，友盟统计相关接口
 * 统计玩家等级
 ```java
