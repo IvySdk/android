@@ -1,5 +1,10 @@
 #  android sdk 文档
 # 当前版本：6.0.2
+
+增加引用：
+
+    implementation 'com.tencent:mmkv:1.0.23'
+
 English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
 ## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中进行引用
 ![Copy](/capture/android_pic1.bmp)
