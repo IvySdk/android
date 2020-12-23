@@ -1,5 +1,5 @@
 #  android sdk 文档
-# 当前版本：5.3
+# 当前版本：6.0.2
 English Doc Link ：https://github.com/IvySdk/android/wiki/English-Doc
 ## 1，添加risesdk.jar文件依赖，将demo中的libs目录下的risesdk.jar文件拷贝到您项目中进行引用
 ![Copy](/capture/android_pic1.bmp)
@@ -137,9 +137,13 @@ if(AndroidSdk.hasRewardAd("shop")){ //检查是否有视频广告
 ```java
 showNativeBanner(String tag, int x, int y, int w, int h, int sw, int sh)
 ```
-
-sw: 屏幕宽度
-sh: 屏幕设计高度
+tag:  
+x:  
+y: 
+w: 
+h:   
+sw: 屏幕宽度  
+sh: 屏幕设计高度  
 
 ## 5, faceook接口以及回调
 * 登陆facebook账户
