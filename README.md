@@ -132,6 +132,15 @@ if(AndroidSdk.hasRewardAd("shop")){ //检查是否有视频广告
 }
 ```
 
+* Native广告
+
+```java
+showNativeBanner(String tag, int x, int y, int w, int h, int sw, int sh)
+```
+
+sw: 屏幕宽度
+sh: 屏幕设计高度
+
 ## 5, faceook接口以及回调
 * 登陆facebook账户
 ```java
