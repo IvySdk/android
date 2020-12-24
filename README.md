@@ -252,6 +252,7 @@ builder.setUserCenterListener(new UserCenterListener() {
 ```java
 int billId = 1; //计费点，和运营人员确定即可
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
+AndroidSdk.pay(billId, payload)
 AndroidSdk.query(billId);//查询支付结果
 /**
 * AndroidSdk.pay(billId); //支付接口，对计费点进行支付
