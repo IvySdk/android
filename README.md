@@ -315,6 +315,8 @@ https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
 
 https://stackoverflow.com/questions/30420847/verification-google-play-purchase-from-server-side
 
+接口返回{"status":1} 的JSON字符串，将认为发货成功，将调用支付成功，否则将调用支付失败回调。
+
 AndroidSdk.getPrices函数返回以billId为key的本地化json字符串
 注意: 此函数返回的数据依赖于Google Play的连接，所以游戏刚打开的时候可能没有。
 
