@@ -316,6 +316,23 @@ https://gist.github.com/mkorszunsands/3cbc0016ac7d0bca318228f96ffd0ab3
 
 https://stackoverflow.com/questions/30420847/verification-google-play-purchase-from-server-side
 
+支付校验PHP Sample
+
+```php
+public function get_openssl_key($publicKey){
+  $key = "-----BEGIN PUBLIC KEY-----\n".chunk_split($publicKey, 64, "\n")."-----END PUBLIC KEY-----";
+  $key = openssl_get_publickey($key);
+  return $key;
+}
+
+$public_keys = 'google - public -key'; //计费平台公钥
+$key = $this->get_openssl_key($public_keys);
+// signature: 是客户端post过来的signature数据
+// jsonData 是客户端Post过来的json数据
+$result = openssl_verify($jsonData, base64_decode($signature), $key, OPENSSL_ALGO_SHA1);
+
+```
+
 接口返回
 ```json
 {"status":1}
