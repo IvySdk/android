@@ -509,7 +509,7 @@ AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
 
 ## 9, 远程配置
-RemoteConfig接口首先会检查Firebase RemoteConfig的值，如果不是默认值将fallback到运营本地配置的值。
+RemoteConfig接口首先会检查Firebase RemoteConfig的值，如果是默认值将fallback到运营本地配置的值。
 
 注意: Firebase Remote Config不是数据库，在后台更新后不会立马生效，Firebase会根据自己的策略发布到用户设备上。
 ```java
