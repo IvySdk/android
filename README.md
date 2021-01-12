@@ -507,5 +507,19 @@ AndroidSdk.track("shop"); //统计商店页面
 AndroidSdk.track("shop","buy"); //商店页面购买装备统计
 AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
-## 9，demo中有对接口的详细注释，如您看完demo后还有不明白之处，可发送邮件到appdev@ivymobile.com，我们会尽快给您回复！谢谢！
+
+## 9, 远程配置
+RemoteConfig接口首先会检查Firebase RemoteConfig的值，如果不是默认值将fallback到运营本地配置的值。
+
+注意: Firebase Remote Config不是数据库，在后台更新后不会立马生效，Firebase会根据自己的策略发布到用户设备上。
+```java
+AndroidSdk.getRemoteConfigInt(String key);
+AndroidSdk.getRemoteConfigLong(String key);
+AndroidSdk.getRemoteConfigDouble(String key);
+AndroidSdk.getRemoteConfigBoolean(String key);
+AndroidSdk.getRemoteConfigString(String key);
+```
+
+
+## 10，demo中有对接口的详细注释，如您看完demo后还有不明白之处，可发送邮件到appdev@ivymobile.com，我们会尽快给您回复！谢谢！
   
