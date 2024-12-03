@@ -443,6 +443,32 @@ AndroidSdk.showGoogleAchievements();
 
 ## 8,应用内支付的接口以及回调，后台配置计费点 ：
 
+** 配置说明 **
+verify-url: 订单服务地址
+force-check：是否强制校验，1：开启强制校验
+
+```java
+"payment": {
+    "checkout": {
+      "1": {
+        "feename": "25coins",
+        "repeat": 1,
+        "usd": 1.99
+      },
+      "2": {
+        "feename": "70coins",
+        "repeat": 1,
+        "usd": 4.99
+      },
+      "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtpVDxkfuv2T6jkErdllxnHeMr4JqFucU+gontr0yYlvM4qt3PHlg1VY/1CQeLskBs2K420cQDaAIfCvAqil3VB6NWSci0SbMGkCidPQmlQRn90MCFAX3t+dRwgAlFwvlj4yVP53giV9GKfWVQ4EehWTg9h8fgRtILEEGgNFJMFz3MUS3erBBSOpuc9UDDtnvEo4NRaH6yUI4zUn46nrgskchYlUTeYEQo1y4lS3uPHpgriBk8XLxFIXSyKjHnnNwSeRSqeX6gEKUrzVpxzp122qv4ebdqPfyzxLUySqhkKkr3dkt45OP+/7xn3jYT5V8ClUA9GgoMwZv80bASfh9wwIDAQAB",
+      "verify-url": "http://mergegamesone.iibingo.com/api/order/verifyGoogleOrderLocal",
+      "force-check": 1,
+    }
+  }
+
+
+```
+
 ```java
 int billId = 1; //计费点，和运营人员确定即可
 AndroidSdk.pay(billId);//支付接口，对计费点进行支付
