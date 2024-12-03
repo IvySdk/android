@@ -204,17 +204,17 @@ AndroidSdk.showFullAd(tag, new AdListener() {
  
 
 * banner广告
-
-java
-int[] bannerPos = {
-           AndroidSdk.POS_CENTER,      //居中显示banner广告
-           AndroidSdk.POS_CENTER_BOTTOM, //底部居中显示banner广告
-           AndroidSdk.POS_CENTER_TOP, //顶部居中显示banner广告
-           AndroidSdk.POS_LEFT_BOTTOM, //左下角显示banner广告
-           AndroidSdk.POS_LEFT_TOP, //左上角显示banner广告
-           AndroidSdk.POS_RIGHT_BOTTOM, //右下角显示banner广告
-           AndroidSdk.POS_RIGHT_TOP //右上角显示banner广告
-};
+  ```java
+  int[] bannerPos = {
+             AndroidSdk.POS_CENTER,      //居中显示banner广告
+             AndroidSdk.POS_CENTER_BOTTOM, //底部居中显示banner广告
+             AndroidSdk.POS_CENTER_TOP, //顶部居中显示banner广告
+             AndroidSdk.POS_LEFT_BOTTOM, //左下角显示banner广告
+             AndroidSdk.POS_LEFT_TOP, //左上角显示banner广告
+             AndroidSdk.POS_RIGHT_BOTTOM, //右下角显示banner广告
+             AndroidSdk.POS_RIGHT_TOP //右上角显示banner广告
+  };
+  ```
 
 AndroidSdk.hasBanner(String tag); //是否已准备好banner
 AndroidSdk.showBanner("default", bannerPos[0]); //居中显示banner广告
