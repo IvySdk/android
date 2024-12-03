@@ -105,8 +105,7 @@ dependencies {
 ```js
 apply plugin: 'com.google.firebase.crashlytics'
 ```
-
-## 3,在Activity中初始化Android SDK,构造AndroidSDK builder对象，提供初始化完成回调
+## 4,在Activity中初始化Android SDK,构造AndroidSDK builder对象，提供初始化完成回调
 
 ```java
 @Override
@@ -172,7 +171,7 @@ apply plugin: 'com.google.firebase.crashlytics'
     }
 ```
 
-## 4，广告相关接口以及回调:
+## 5，广告相关接口以及回调:
 
 * 全屏广告，
   1. 插屏状态
@@ -233,8 +232,7 @@ if(AndroidSdk.hasRewardAd("shop")){ //检查是否有视频广告
     }); //展示视频广告
 }
 ```
-
-## 5, faceook接口以及回调
+## 6, faceook接口以及回调
 
 * 登陆facebook账户
 
@@ -443,9 +441,7 @@ AndroidSdk.updateGoogleAchievement(String achievementId, int step, new GoogleLis
 AndroidSdk.showGoogleAchievements();
 ```
 
-
-
-## 6,应用内支付的接口以及回调，后台配置计费点 ：
+## 8,应用内支付的接口以及回调，后台配置计费点 ：
 
 ```java
 int billId = 1; //计费点，和运营人员确定即可
@@ -576,9 +572,7 @@ AndroidSdk.getPrices函数返回以billId为key的本地化json字符串
     ///     }
     /// }
 ```
-
-
-## 8，我们额外还提供以下接口：
+## 9，我们额外还提供以下接口：
 
 * 提供给欧盟区的设置: 在应用的设置页面提供一个设置项，让用户可以设置广告相关的策略
 
@@ -647,7 +641,7 @@ AndroidSdk.track("shop","buy"); //商店页面购买装备统计
 AndroidSdk.track("shop","buy","血瓶"); //商店页面购买血瓶装备统计
 ```
 
-## 9, 远程配置
+## 10, 远程配置
 
 RemoteConfig接口首先会检查Firebase RemoteConfig的值，如果是默认值将fallback到运营本地配置的值。
 
