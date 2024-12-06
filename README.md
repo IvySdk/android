@@ -18,7 +18,9 @@ defaultConfig {
                 gms_games_app_id  : "933591439403",
                 google_admob_application_id: 'ca-app-pub-1914768831611213~5856809174',
                 facebook_appId             : '419434508669986',
-                facebook_clientToken: '003925c73e83fe389581f4700b43f16c'
+                facebook_clientToken: '003925c73e83fe389581f4700b43f16c',
+                parfkaUrl: 'http://gateway-3.hierugo.com',
+                parfka_appToken: 'ap2767',
         ]
     }
 ```
